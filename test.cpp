@@ -68,6 +68,33 @@ int maxSubArray(const vector<int>& nums)
         currentSum = max(nums[i], currentSum + nums[i]);
         maxSum = max(maxSum, currentSum);
     }
+    cout << "maxSum: " << maxSum << endl;
+    return maxSum;
+}
+
+int maxSubArray_v2(const vector<int>& nums)
+{
+    int maxSum = nums[0];
+    int currentSum = 0;
+    int temp = 0;
+    int start = 0;
+    int end = 0;
+    for (int i = 0; i < nums.size(); ++i)
+    {
+        currentSum += nums[i];
+        if (maxSum < currentSum)
+        {
+            start = temp;
+            end = i;
+            maxSum = currentSum;
+        }
+        if (currentSum < 0)
+        {
+            temp = i + 1;
+            currentSum = 0;
+        }
+    }
+    cout << "start: " << start << ", end: " << end << " maxSum: " << maxSum << endl;
     return maxSum;
 }
 
